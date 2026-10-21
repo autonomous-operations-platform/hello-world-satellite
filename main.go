@@ -7,12 +7,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/framework/satellite"
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/store/memstore"
+	"github.com/autonomous-operations/aos-framework/pkg/framework/satellite"
+	"github.com/autonomous-operations/aos-framework/pkg/store/memstore"
 
-	_ "github.tools.sap/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
-	_ "github.tools.sap/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
-	_ "github.tools.sap/autonomous-operations/aos-demo/satellites/hello-world-satellite/operators"
+	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
+	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
+	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/operators"
 )
 
 func main() {

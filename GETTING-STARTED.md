@@ -1,6 +1,3 @@
-> [!IMPORTANT]  
-> The project website at https://autonomous-operations.dev/ is not launched yet. Hence any links or documentation written about here must be checked before merging to main and publishing the repository
-
 # Getting Started: Build a Satellite by Hand
 
 This guide walks you through building an Autonomous Operations Satellite from scratch.
@@ -10,7 +7,7 @@ The guide builds the [`hello-world-satellite`](.) step by step.
 That Satellite monitors a CPU temperature sensor and controls a fan.
 It is small enough to read in one sitting and uses only the in-memory store, so you need no external services to run it.
 
-> New to the concepts? Read the [Autonomous Operations overview](https://pages.github.tools.sap/autonomous-operations/autonomous-operations/) first.
+> New to the concepts? Read the [Autonomous Operations overview](https://pages.github.com/autonomous-operations/autonomous-operations/) first.
 > This guide links to the relevant specification pages as it goes, but it is written to stand on its own.
 
 ## What a Satellite is
@@ -35,25 +32,19 @@ This decoupling is what lets you add, remove, or replace one component without t
                         Operator  ◄───insight───────SRS
 ```
 
-The [`aos-framework`](https://github.tools.sap/autonomous-operations/aos-framework) library gives you the interfaces for these three components, the store, a registry, and an orchestrator (`satellite.Run`) that starts everything in the right order.
+The [`aos-framework`](https://github.com/autonomous-operations/aos-framework) library gives you the interfaces for these three components, the store, a registry, and an orchestrator (`satellite.Run`) that starts everything in the right order.
 You write the business logic; the framework handles subscription, ordering, and the audit trail.
 
 ## Prerequisites
 
 1. **Install Go 1.27.1** from [go.dev/dl](https://go.dev/dl/).
 
-2. **Configure private module access** so Go can fetch the framework:
+2. **Clone the repositories** side by side. The demo uses a Go workspace to
+   build against a local copy of the framework:
 
    ```bash
-   go env -w GOPRIVATE=github.tools.sap/*
-   ```
-
-3. **Clone the repositories** side by side. The demo uses a Go workspace to
-   build against a local framework checkout:
-
-   ```bash
-   git clone https://github.tools.sap/autonomous-operations/aos-framework
-   git clone https://github.tools.sap/autonomous-operations/aos-demo
+   git clone https://github.com/autonomous-operations/aos-framework
+   git clone https://github.com/autonomous-operations/aos-demo
    ```
 
 ## The data model in one minute
@@ -96,8 +87,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/framework/registry"
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/framework/store"
+	"github.com/autonomous-operations/aos-framework/pkg/framework/registry"
+	"github.com/autonomous-operations/aos-framework/pkg/framework/store"
 )
 
 func init() { registry.RegisterCollector(&TemperatureCollector{}) }
@@ -290,12 +281,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/framework/satellite"
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/store/memstore"
+	"github.com/autonomous-operations/aos-framework/pkg/framework/satellite"
+	"github.com/autonomous-operations/aos-framework/pkg/store/memstore"
 
-	_ "github.tools.sap/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
-	_ "github.tools.sap/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
-	_ "github.tools.sap/autonomous-operations/aos-demo/satellites/hello-world-satellite/operators"
+	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
+	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
+	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/operators"
 )
 
 func main() {
@@ -339,7 +330,7 @@ cp go.work.example go.work
 
 # In workspace mode, use `go get` (not `go mod tidy`) to resolve the framework,
 # then vendor.
-go get github.tools.sap/autonomous-operations/aos-framework@latest
+go get github.com/autonomous-operations/aos-framework@latest
 go work vendor
 
 go run .
@@ -363,6 +354,6 @@ Congratulations, you now have a complete collect-observe-act loop!
 
 ## Where to go next
 
-- **What library methods are available?** See the [API reference](https://github.tools.sap/autonomous-operations/aos-framework#api-reference) in `aos-framework` for the full store, filter, query, and record surface.
+- **What library methods are available?** See the [API reference](https://github.com/autonomous-operations/aos-framework#api-reference) in `aos-framework` for the full store, filter, query, and record surface.
 - **A realistic example.** The [F5 VLAN demo Satellite](../f5-vlan-demo-satellite) shows a push-based OTLP collector, a correlation-window observer, and the Apache Doris store.
-- **The concepts in depth.** The [Collector](https://pages.github.tools.sap/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/collector/), [Observer](https://pages.github.tools.sap/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/observer/), and [Operator](https://pages.github.tools.sap/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/operator/) specification pages define each component formally.
+- **The concepts in depth.** The [Collector](https://pages.github.com/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/collector/), [Observer](https://pages.github.com/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/observer/), and [Operator](https://pages.github.com/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/operator/) specification pages define each component formally.

@@ -1,3 +1,6 @@
+> ! TODO !
+> Before merging, I would like to have a pipeline that generates and pushes a new OCM bundle to this repo whenever a tag is created on main or something like that
+> People can then pull from the repo
 [![CodeQL Advanced](https://github.com/autonomous-operations-platform/hello-world-satellite/actions/workflows/codeql.yml/badge.svg)](https://github.com/autonomous-operations-platform/hello-world-satellite/actions/workflows/codeql.yml) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/autonomous-operations-platform/hello-world-satellite/badge)](https://scorecard.dev/viewer/?uri=github.com/autonomous-operations-platform/hello-world-satellite) [![REUSE status](https://api.reuse.software/badge/github.com/autonomous-operations-platform/hello-world-satellite)](https://api.reuse.software/info/github.com/autonomous-operations-platform/hello-world-satellite)
 
 # Hello World Satellite
@@ -18,13 +21,7 @@ New to AOS? The [Getting Started guide](./GETTING-STARTED.md) builds this satell
 
 Install Go 1.27.1 from [go.dev/dl](https://go.dev/dl/).
 
-### 2. Configure private module access
-
-```bash
-go env -w GOPRIVATE=github.tools.sap/*
-```
-
-### 3. Set up the Go workspace
+### 2. Set up the Go workspace
 
 Copy the example workspace file and adjust the `replace` path to point to your local `aos-framework` clone:
 
@@ -39,7 +36,7 @@ The `go.work` file is gitignored. It redirects the framework import to your loca
 In workspace mode, use `go get` to add or update dependencies (it respects the `go.work` replace), then vendor:
 
 ```bash
-go get github.tools.sap/autonomous-operations/aos-framework@latest
+go get github.com/autonomous-operations/aos-framework@latest
 go work vendor
 ```
 

@@ -7,4 +7,4 @@ go 1.27.1
 
 use .
 
-replace github.tools.sap/autonomous-operations/aos-framework => ../../../aos-framework
+replace github.com/autonomous-operations/aos-framework => ../../../aos-framework

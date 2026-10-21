@@ -6,8 +6,8 @@ import (
 	"log/slog"
 	"time"
 
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/framework/registry"
-	"github.tools.sap/autonomous-operations/aos-framework/pkg/framework/store"
+	"github.com/autonomous-operations/aos-framework/pkg/framework/registry"
+	"github.com/autonomous-operations/aos-framework/pkg/framework/store"
 )
 
 func init() { registry.RegisterCollector(&TemperatureCollector{}) }
