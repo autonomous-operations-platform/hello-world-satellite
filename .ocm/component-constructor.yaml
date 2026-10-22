@@ -1,5 +1,5 @@
 components:
-  - name: github.com/autonomous-operations/hello-world-satellite
+  - name: github.com/autonomous-operations-platform/hello-world-satellite
     version: ${VERSION}
     provider:
       name: autonomous-operations

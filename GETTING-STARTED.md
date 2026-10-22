@@ -32,7 +32,7 @@ This decoupling is what lets you add, remove, or replace one component without t
                         Operator  ◄───insight───────SRS
 ```
 
-The [`aos-framework`](https://github.com/autonomous-operations/autonomous-operations-satellite) library gives you the interfaces for these three components, the store, a registry, and an orchestrator (`satellite.Run`) that starts everything in the right order.
+The [`autonomous-operations-satellite`](https://github.com/autonomous-operations-platform/autonomous-operations-satellite) library gives you the interfaces for these three components, the store, a registry, and an orchestrator (`satellite.Run`) that starts everything in the right order.
 You write the business logic; the framework handles subscription, ordering, and the audit trail.
 
 ## Prerequisites
@@ -43,8 +43,8 @@ You write the business logic; the framework handles subscription, ordering, and 
    build against a local copy of the framework:
 
    ```bash
-   git clone https://github.com/autonomous-operations/autonomous-operations-satellite
-   git clone https://github.com/autonomous-operations/aos-demo
+   git clone https://github.com/autonomous-operations-platform/autonomous-operations-satellite
+   git clone https://github.com/autonomous-operations-platform/hello-world-satellite
    ```
 
 ## The data model in one minute
@@ -87,8 +87,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/registry"
-	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/store"
+	"github.com/autonomous-operations-platform/autonomous-operations-satellite/pkg/framework/registry"
+	"github.com/autonomous-operations-platform/autonomous-operations-satellite/pkg/framework/store"
 )
 
 func init() { registry.RegisterCollector(&TemperatureCollector{}) }
@@ -281,12 +281,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/satellite"
-	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/store/memstore"
+	"github.com/autonomous-operations-platform/autonomous-operations-satellite/pkg/framework/satellite"
+	"github.com/autonomous-operations-platform/autonomous-operations-satellite/pkg/store/memstore"
 
-	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
-	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
-	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/operators"
+	_ "github.com/autonomous-operations-platform/hello-world-satellite/collectors"
+	_ "github.com/autonomous-operations-platform/hello-world-satellite/observers"
+	_ "github.com/autonomous-operations-platform/hello-world-satellite/operators"
 )
 
 func main() {
@@ -323,14 +323,14 @@ Starting readers before writers guarantees no event is produced before someone i
 From the Satellite directory, set up the workspace, vendor dependencies, and run:
 
 ```bash
-cd aos-demo/satellites/hello-world-satellite
+cd hello-world-satellite
 
 # Point the workspace at your local aos-framework checkout.
 cp go.work.example go.work
 
 # In workspace mode, use `go get` (not `go mod tidy`) to resolve the framework,
 # then vendor.
-go get github.com/autonomous-operations/autonomous-operations-satellite@latest
+go get github.com/autonomous-operations-platform/autonomous-operations-satellite@latest
 go work vendor
 
 go run .
@@ -354,5 +354,5 @@ Congratulations, you now have a complete collect-observe-act loop!
 
 ## Where to go next
 
-- **What library methods are available?** See the [API reference](https://github.com/autonomous-operations/autonomous-operations-satellite#api-reference) in `aos-framework` for the full store, filter, query, and record surface.
+- **What library methods are available?** See the [API reference](https://github.com/autonomous-operations-platform/autonomous-operations-satellite#api-reference) in `aos-framework` for the full store, filter, query, and record surface.
 - **The concepts in depth.** The [Collector, Observer and Operator](https://autonomous-operations.dev/docs/aos/overview.html#sub-components) specification pages define each component formally.

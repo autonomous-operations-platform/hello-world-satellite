@@ -7,4 +7,4 @@ go 1.27.1
 
 use .
 
-replace github.com/autonomous-operations/autonomous-operations-satellite => ../../../aos-framework
+replace github.com/autonomous-operations-platform/autonomous-operations-satellite => ../autonomous-operations-satellite

@@ -20,7 +20,7 @@ Install Go 1.27.1 from [go.dev/dl](https://go.dev/dl/).
 
 ### 2. Set up the Go workspace
 
-Copy the example workspace file and adjust the `replace` path to point to your local `aos-framework` clone:
+Copy the example workspace file and adjust the `replace` path to point to your local `autonomous-operations-satellite` clone:
 
 ```bash
 cp go.work.example go.work
@@ -33,7 +33,7 @@ The `go.work` file is gitignored. It redirects the framework import to your loca
 In workspace mode, use `go get` to add or update dependencies (it respects the `go.work` replace), then vendor:
 
 ```bash
-go get github.com/autonomous-operations/autonomous-operations-satellite@latest
+go get github.com/autonomous-operations-platform/autonomous-operations-satellite@latest
 go work vendor
 ```
 

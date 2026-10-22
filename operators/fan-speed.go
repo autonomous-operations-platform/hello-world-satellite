@@ -6,8 +6,8 @@ import (
 	"log/slog"
 	"math/rand"
 
-	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/registry"
-	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/store"
+	"github.com/autonomous-operations-platform/autonomous-operations-satellite/pkg/framework/registry"
+	"github.com/autonomous-operations-platform/autonomous-operations-satellite/pkg/framework/store"
 )
 
 func init() { registry.RegisterOperator(&FanSpeedController{}) }
