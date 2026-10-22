@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/autonomous-operations/aos-framework/pkg/framework/satellite"
-	"github.com/autonomous-operations/aos-framework/pkg/store/memstore"
+	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/satellite"
+	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/store/memstore"
 
 	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
 	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
