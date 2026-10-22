@@ -1,6 +1,3 @@
-> ! TODO !
-> Before merging, I would like to have a pipeline that generates and pushes a new OCM bundle to this repo whenever a tag is created on main or something like that
-> People can then pull from the repo
 [![CodeQL Advanced](https://github.com/autonomous-operations-platform/hello-world-satellite/actions/workflows/codeql.yml/badge.svg)](https://github.com/autonomous-operations-platform/hello-world-satellite/actions/workflows/codeql.yml) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/autonomous-operations-platform/hello-world-satellite/badge)](https://scorecard.dev/viewer/?uri=github.com/autonomous-operations-platform/hello-world-satellite) [![REUSE status](https://api.reuse.software/badge/github.com/autonomous-operations-platform/hello-world-satellite)](https://api.reuse.software/info/github.com/autonomous-operations-platform/hello-world-satellite)
 
 # Hello World Satellite
@@ -36,7 +33,7 @@ The `go.work` file is gitignored. It redirects the framework import to your loca
 In workspace mode, use `go get` to add or update dependencies (it respects the `go.work` replace), then vendor:
 
 ```bash
-go get github.com/autonomous-operations/aos-framework@latest
+go get github.com/autonomous-operations/autonomous-operations-satellite@latest
 go work vendor
 ```
 

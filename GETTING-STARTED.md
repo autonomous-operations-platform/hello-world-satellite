@@ -7,7 +7,7 @@ The guide builds the [`hello-world-satellite`](.) step by step.
 That Satellite monitors a CPU temperature sensor and controls a fan.
 It is small enough to read in one sitting and uses only the in-memory store, so you need no external services to run it.
 
-> New to the concepts? Read the [Autonomous Operations overview](https://pages.github.com/autonomous-operations/autonomous-operations/) first.
+> New to the concepts? Read the [Autonomous Operations overview](https://autonomous-operations.dev/docs) first.
 > This guide links to the relevant specification pages as it goes, but it is written to stand on its own.
 
 ## What a Satellite is
@@ -32,7 +32,7 @@ This decoupling is what lets you add, remove, or replace one component without t
                         Operator  ◄───insight───────SRS
 ```
 
-The [`aos-framework`](https://github.com/autonomous-operations/aos-framework) library gives you the interfaces for these three components, the store, a registry, and an orchestrator (`satellite.Run`) that starts everything in the right order.
+The [`aos-framework`](https://github.com/autonomous-operations/autonomous-operations-satellite) library gives you the interfaces for these three components, the store, a registry, and an orchestrator (`satellite.Run`) that starts everything in the right order.
 You write the business logic; the framework handles subscription, ordering, and the audit trail.
 
 ## Prerequisites
@@ -43,7 +43,7 @@ You write the business logic; the framework handles subscription, ordering, and 
    build against a local copy of the framework:
 
    ```bash
-   git clone https://github.com/autonomous-operations/aos-framework
+   git clone https://github.com/autonomous-operations/autonomous-operations-satellite
    git clone https://github.com/autonomous-operations/aos-demo
    ```
 
@@ -87,8 +87,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/autonomous-operations/aos-framework/pkg/framework/registry"
-	"github.com/autonomous-operations/aos-framework/pkg/framework/store"
+	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/registry"
+	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/store"
 )
 
 func init() { registry.RegisterCollector(&TemperatureCollector{}) }
@@ -281,8 +281,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/autonomous-operations/aos-framework/pkg/framework/satellite"
-	"github.com/autonomous-operations/aos-framework/pkg/store/memstore"
+	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/framework/satellite"
+	"github.com/autonomous-operations/autonomous-operations-satellite/pkg/store/memstore"
 
 	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/collectors"
 	_ "github.com/autonomous-operations/aos-demo/satellites/hello-world-satellite/observers"
@@ -330,7 +330,7 @@ cp go.work.example go.work
 
 # In workspace mode, use `go get` (not `go mod tidy`) to resolve the framework,
 # then vendor.
-go get github.com/autonomous-operations/aos-framework@latest
+go get github.com/autonomous-operations/autonomous-operations-satellite@latest
 go work vendor
 
 go run .
@@ -354,6 +354,5 @@ Congratulations, you now have a complete collect-observe-act loop!
 
 ## Where to go next
 
-- **What library methods are available?** See the [API reference](https://github.com/autonomous-operations/aos-framework#api-reference) in `aos-framework` for the full store, filter, query, and record surface.
-- **A realistic example.** The [F5 VLAN demo Satellite](../f5-vlan-demo-satellite) shows a push-based OTLP collector, a correlation-window observer, and the Apache Doris store.
-- **The concepts in depth.** The [Collector](https://pages.github.com/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/collector/), [Observer](https://pages.github.com/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/observer/), and [Operator](https://pages.github.com/autonomous-operations/autonomous-operations/#/architecture/specifications/spec-ao/components/aos/operator/) specification pages define each component formally.
+- **What library methods are available?** See the [API reference](https://github.com/autonomous-operations/autonomous-operations-satellite#api-reference) in `aos-framework` for the full store, filter, query, and record surface.
+- **The concepts in depth.** The [Collector, Observer and Operator](https://autonomous-operations.dev/docs/aos/overview.html#sub-components) specification pages define each component formally.
