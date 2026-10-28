@@ -10,7 +10,7 @@ A minimal AOS satellite demonstrating the collector → observer → operator pa
 | Observer | `temperature-threshold` | Watches `cpu-temp` telemetry. Emits a `temperature-high` insight above 75°C and a `temperature-low` insight below 60°C. The band between the two thresholds prevents oscillation. |
 | Operator | `fan-speed-controller` | Reacts to temperature insights: sets fan speed to 80% on `temperature-high`, and back to 20% on `temperature-low`. Fails with a simulated transient error 30% of the time. |
 
-New to AOS? The [Getting Started guide](./GETTING-STARTED.md) builds this satellite by hand, step by step.
+New to AOS? The [documentation](https://autonomous-operations.dev) can help to get you started.
 
 ## Local Setup
 
