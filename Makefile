@@ -11,9 +11,9 @@ SIGN_KEY    ?= /tmp/satellite-sign.key
 PUB_KEY     := .ocm/satellite.pub.pem
 SIG_NAME    := satellite-sig
 
-REGISTRY          ?= autonomous-operations-docker-releases.common.repositories.cloud.sap
+REGISTRY          ?= to-be-defined.com
 GENERIC_REGISTRY  ?= autonomous-operations-generic-releases
-ARTIFACTORY_BASE  := https://common.repositories.cloud.sap/artifactory
+ARTIFACTORY_BASE  := https://to-be-defined.com
 
 # Derive VERSION from the exact git tag on HEAD (X.Y.Z).
 # Override for local testing: make bundle VERSION=0.1.0
