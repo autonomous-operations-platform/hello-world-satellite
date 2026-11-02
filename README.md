@@ -1,41 +1,62 @@
-<!--
-SPDX-FileCopyrightText: 2026 SAP SE or an SAP affiliate company and Autonomous Operations Platform contributors
+[![CodeQL Advanced](https://github.com/autonomous-operations-platform/hello-world-satellite/actions/workflows/codeql.yml/badge.svg)](https://github.com/autonomous-operations-platform/hello-world-satellite/actions/workflows/codeql.yml) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/autonomous-operations-platform/hello-world-satellite/badge)](https://scorecard.dev/viewer/?uri=github.com/autonomous-operations-platform/hello-world-satellite) [![REUSE status](https://api.reuse.software/badge/github.com/autonomous-operations-platform/hello-world-satellite)](https://api.reuse.software/info/github.com/autonomous-operations-platform/hello-world-satellite)
 
-SPDX-License-Identifier: Apache-2.0
--->
+# Hello World Satellite
 
-[![CodeQL Advanced](https://github.com/autonomous-operations-platform/repository-template/actions/workflows/codeql.yml/badge.svg)](https://github.com/autonomous-operations-platform/repository-template/actions/workflows/codeql.yml) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/autonomous-operations-platform/repository-template/badge)](https://scorecard.dev/viewer/?uri=github.com/autonomous-operations-platform/repository-template) [![REUSE status](https://api.reuse.software/badge/github.com/autonomous-operations-platform/repository-template)](https://api.reuse.software/info/github.com/autonomous-operations-platform/repository-template)
+A minimal AOS satellite demonstrating the collector → observer → operator pattern using a CPU temperature monitor and fan speed controller.
 
-# Autonomous Operations Platform Repository Template
+| Component | Name | Role |
+|---|---|---|
+| Collector | `temperature-collector` | Mocks a CPU temperature sensor (oscillates between 30–95°C) and emits telemetry every 5s with `source`, `value`, and `unit` attributes. |
+| Observer | `temperature-threshold` | Watches `cpu-temp` telemetry. Emits a `temperature-high` insight above 75°C and a `temperature-low` insight below 60°C. The band between the two thresholds prevents oscillation. |
+| Operator | `fan-speed-controller` | Reacts to temperature insights: sets fan speed to 80% on `temperature-high`, and back to 20% on `temperature-low`. Fails with a simulated transient error 30% of the time. |
 
-Default template for Autonomous Operations Platform open source repositories managed by SAP. All repositories on github.com/autonomous-operations-platform are created based on this template.
+New to AOS? The [documentation](https://autonomous-operations.dev) can help to get you started.
 
-## To-Do
+## Local Setup
 
-In case you are the maintainer of a new Autonomous Operations Platform open source project, these are the steps to do with the template files:
+### 1. Install Go
 
-- Install the [REUSE tool](https://reuse.readthedocs.io/) locally via pip (`pip install reuse`) to validate license compliance before pushing. The system package (e.g. via apt) is outdated and does not support `REUSE.toml`.
-- Check if the default license (Apache 2.0) also applies to your project. A license change should only be required in exceptional cases. If this is the case, please change the [license file](LICENSE).
-- Enter the correct metadata for the REUSE tool. You can find an initial .reuse/dep5 file to build on. Please replace the parts inside the single angle quotation marks < > by the specific information for your repository and be sure to run the REUSE tool to validate that the metadata is correct.
-- Adjust the contribution guidelines (e.g. add coding style guidelines, pull request checklists, different license if needed etc.)
-- Add information about your project to this README (name, description, requirements etc). Especially take care for the <your-project> placeholders - those ones need to be replaced with your project name. See the sections below the horizontal line and [our guidelines on our wiki page](https://wiki.one.int.sap/wiki/spaces/ospodocs/pages/3564976048/Guidelines+for+GitHub+Health+files+Readme+Contributing+Code+of+Conduct#GuidelinesforGitHubHealthfiles(Readme,Contributing,CodeofConduct)-Readme.md) what is required and recommended.
-- Remove all content in this README above and including the horizontal line
+Install Go 1.27.1 from [go.dev/dl](https://go.dev/dl/).
 
-***
+### 2. Set up the Go workspace
 
-# Our new open source project
+Copy the example workspace file and adjust the `replace` path to point to your local `autonomous-operations-satellite` clone:
 
-## About this project
+```bash
+cp go.work.example go.work
+```
 
-*Insert a short description of your project here...*
+The `go.work` file is gitignored. It redirects the framework import to your local checkout for all build and test commands.
 
-## Requirements and Setup
+### 4. Fetch and vendor dependencies
 
-*Insert a short description what is required to get your project running...*
+In workspace mode, use `go get` to add or update dependencies (it respects the `go.work` replace), then vendor:
+
+```bash
+go get github.com/autonomous-operations-platform/autonomous-operations-satellite@latest
+go work vendor
+```
+
+> Note: `go mod tidy` does not respect `go.work` replace directives and will fail when pointing to a local framework checkout. Use `go get` instead.
+
+### 5. Build
+
+```bash
+go build .
+```
+
+### 6. Configure and run
+
+Then run:
+
+```bash
+./hello-world-satellite
+```
+
 
 ## Support, Feedback, Contributing
 
-This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/autonomous-operations-platform/repository-template/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](https://github.com/autonomous-operations-platform/.github/blob/main/CONTRIBUTING.md).
+This project is open to feature requests/suggestions, bug reports etc. via [GitHub issues](https://github.com/autonomous-operations-platform/hello-world-satellite/issues). Contribution and feedback are encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](https://github.com/autonomous-operations-platform/.github/blob/main/CONTRIBUTING.md).
 
 ## Security / Disclosure
 
@@ -47,4 +68,4 @@ We as members, contributors, and leaders pledge to make participation in our com
 
 ## Licensing
 
-Copyright 2026 SAP SE or an SAP affiliate company and Autonomous Operations Platform contributors. Please see our [LICENSE](./LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/autonomous-operations-platform/repository-template).
+Copyright 2026 SAP SE or an SAP affiliate company and Autonomous Operations Platform contributors. Please see our [LICENSE](./LICENSE) for copyright and license information. Detailed information including third-party components and their licensing/copyright information is available [via the REUSE tool](https://api.reuse.software/info/github.com/autonomous-operations-platform/hello-world-satellite).

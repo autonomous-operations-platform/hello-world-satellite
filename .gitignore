@@ -9,6 +9,7 @@ vendor/
 *.exe~
 *.test
 coverage/
+go.work
 
 # Compiled class file
 *.class

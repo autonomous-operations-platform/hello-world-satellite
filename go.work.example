@@ -1,0 +1,10 @@
+# Copy this file to `go.work` to use a local checkout of aos-framework.
+# `go.work` is gitignored — do not commit it.
+#
+# Adjust the replace path to point to your local aos-framework clone.
+
+go 1.27.1
+
+use .
+
+replace github.com/autonomous-operations-platform/autonomous-operations-satellite => ../autonomous-operations-satellite

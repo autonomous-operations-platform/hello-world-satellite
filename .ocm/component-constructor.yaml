@@ -1,0 +1,26 @@
+components:
+  - name: github.com/autonomous-operations-platform/hello-world-satellite
+    version: ${VERSION}
+    provider:
+      name: autonomous-operations
+    resources:
+      - name: hello-world-satellite
+        type: executable
+        version: ${VERSION}
+        extraIdentity:
+          os: linux
+          architecture: amd64
+        input:
+          type: File/v1
+          path: ./bin/hello-world-satellite-linux-amd64
+          mediaType: application/octet-stream
+      - name: hello-world-satellite
+        type: executable
+        version: ${VERSION}
+        extraIdentity:
+          os: linux
+          architecture: arm64
+        input:
+          type: File/v1
+          path: ./bin/hello-world-satellite-linux-arm64
+          mediaType: application/octet-stream
